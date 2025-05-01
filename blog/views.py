@@ -1,15 +1,18 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 
-# Create your views here.
+
+def view1(request):
+    return HttpResponse("you are in view 1")
 
 
-def test1():
-    pass
+def show_year(request, input_year):
+    return HttpResponse(f"You are in year {input_year}")
 
 
-def test2():
-    pass
+def show_name(request, input_name):
+    return HttpResponse(f"Your name is {input_name}")
 
 
-def test3():
-    pass
+def view3(request):
+    return HttpResponse("you are in view 3")
