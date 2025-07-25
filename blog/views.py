@@ -16,3 +16,14 @@ def show_name(request, input_name):
 
 def view3(request):
     return HttpResponse("you are in view 3")
+
+
+
+# def atena_function(request, feeling):
+#     txt = ""
+#     # for _ in range(2):
+#     for i in range(10):
+#         txt += i * "\t"
+#         txt += "I Love you Atena\n"
+#     return HttpResponse(txt, content_type="text/plain")
+#     # return HttpResponse(100 * "\tI Love you Atena\n", content_type="text/plain")

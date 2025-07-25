@@ -1,4 +1,5 @@
 from django.urls import path, register_converter, re_path
+# from blog.views import view1, show_year, show_name, view3, atena_function
 from blog.views import view1, show_year, show_name, view3
 from blog.utils import FourDigitYear
 
@@ -10,4 +11,5 @@ urlpatterns = [
     re_path(r'year/(?P<input_year>[0-9]{2,4})/', show_year),
     path('name/<str:input_name>/', show_name),
     path('categories/list', view3),
+    # re_path(r'(?P<feeling>[\w]+)/', atena_function),
 ]
