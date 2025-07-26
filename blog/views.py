@@ -1,5 +1,7 @@
 from django.http import HttpResponse
+from django.db.models import Q
 from django.shortcuts import render
+from blog.models import ProductType, ProductAttribute
 
 
 def view1(request):
@@ -16,6 +18,15 @@ def show_name(request, input_name):
 
 def view3(request):
     return HttpResponse("you are in view 3")
+
+
+def product_list_view(request):
+    pt = ProductType.objects.all()
+    pa = ProductAttribute.objects.filter(is_active=True)
+    pa_f = ProductAttribute.objects.filter(Q(is_active=True) | Q(is_active=False))
+    a = 5
+    return HttpResponse("in product_list_view")
+
 
 
 
