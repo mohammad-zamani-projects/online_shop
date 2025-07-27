@@ -54,11 +54,74 @@ class ProductAttribute(models.Model):
     create_time = models.DateTimeField(auto_now_add=True)
     modified_time = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=32)
-    product_type = models.ForeignKey(ProductType, on_delete=models.CASCADE)
+    product_type = models.ForeignKey(ProductType, on_delete=models.CASCADE, related_name="product_attribute")
     # attribute_type = models.PositiveSmallIntegerField(default=WHITE, choices=ATTRIBUTE_TYPE_FIELD)
     attribute_type = models.PositiveSmallIntegerField(choices=ATTRIBUTE_TYPE_FIELD)
     is_active = models.BooleanField(default=False, null=True)
 
 
 # _________________________________________model separator ____________________________________________
+
+
+class Comment(models.Model):
+    class Meta:
+        verbose_name = "Comment"
+        verbose_name_plural = "Comments"
+
+    def __str__(self):
+        return self.comment
+
+    SAD = 1
+    HAPPY = 2
+    FEAR = 3
+
+    MOOD_CHOICES = {
+        (SAD, "Sad"),
+        (HAPPY, "Happy"),
+        (FEAR, "Fear")
+    }
+
+    create_time = models.DateTimeField(auto_now_add=True)
+    modified_time = models.DateTimeField(auto_now=True)
+    comment = models.CharField(max_length=2048, blank=True, null=True)
+    mood = models.PositiveSmallIntegerField(choices=MOOD_CHOICES)
+
+
+# _________________________________________model separator ____________________________________________
+
+
+class Post(models.Model):
+    class Meta:
+        verbose_name = "Post"
+        verbose_name_plural = "Posts"
+        permissions = [
+            ('has_comment_permission', "User Has Comment Permission")
+        ]
+
+    def __str__(self):
+        return self.image_url
+
+    create_time = models.DateTimeField(auto_now_add=True)
+    modified_time = models.DateTimeField(auto_now=True)
+    image_url = models.CharField(max_length=64, blank=True)
+    image = models.ImageField(blank=True, null=True, upload_to='blog/')
+    caption = models.CharField(max_length=1024, blank=True, null=True)
+    like = models.BooleanField(default=False, null=True)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="post")
+
+
+# _________________________________________model separator ____________________________________________
+
+
+
+
+
+
+
+
+
+
+
+
+
 

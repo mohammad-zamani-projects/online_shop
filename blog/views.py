@@ -1,7 +1,7 @@
 from django.http import HttpResponse
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.shortcuts import render
-from blog.models import ProductType, ProductAttribute
+from blog.models import ProductType, ProductAttribute, Post, Comment
 
 
 def view1(request):
@@ -27,6 +27,12 @@ def product_list_view(request):
     a = 5
     return HttpResponse("in product_list_view")
 
+
+def post_show(request):
+    post = Post.objects.all().annotate(
+        comments_count=Count('comment__id')
+    )
+    return render(request, 'blog/post_show.html')
 
 
 

@@ -1,10 +1,42 @@
+{% load post_tag %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>hello</title>
 </head>
-<body>
-$END$
+
+{% get_posts as Get_posts %}
+{#{% get_posts_image as posts_image %}#}
+
+<img>
+    salam bar shoma bad! <br><br>
+    {% for get_post in Get_posts %}
+        <a> the "{{ get_post.image_url }}" is created at "{{ get_post.create_time }}" and its caption is:<br> "{{ get_post.caption }}" </a> <br><br>
+    {% endfor %}
+    namoosan kheyli bahale!!!!! <br><br>
+
+{#    {% for get_post in Get_posts %}#}
+{#        <img src="{{ get_post.image }}">#}
+{#    {% endfor %}#}
+
+
+{% for get_post in Get_posts %}
+    {% if get_post.image %}
+        <img src="{{ get_post.image }}" alt="{{ get_post.caption }}">
+    {% else %}
+        <p>تصویری موجود نیست.</p>
+    {% endif %}
+{% endfor %}
+
+
 </body>
 </html>
+
+
+
+{#{% extends 'base.html' %}#}
+
+{#{% block title %} yoohoo! {% endblock %}#}
+{#{% block content %} ino daram az post show be base mifrestam {% endblock %}#}
